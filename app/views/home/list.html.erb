@@ -1,0 +1,37 @@
+<div class="container">
+
+    <h1>여기는게시물이보여지는장소입니다.</h1>
+    
+    
+    <% @list.each do |l| %>
+        <div class="well">
+            <p>ID : <%= l.id %></p>
+            <p>학번 : <%= l.number %></p>
+            <p>제목 : <%= l.title %></p>
+            <p>내용 : <%= l.content %></p>
+            <p>작성시간 : <%= l.created_at %></p>
+            <a href="/destroy/<%= l.id %>">[삭제]</a>
+            <a href="/update_view/<%= l.id %>">[수정]</a>
+            
+            <form action="/reply" method="post">
+              <input name="b_id" type="hidden" value ="<%= l.id %>">
+              <textarea name="content" class="form-control" rows="1" cols="50"></textarea>
+              <br>
+              <input type="submit" value="Submit">
+            </form> 
+            
+            <% l.replies.reverse.each do |r| %>
+              <p><%= r.content %></p>
+            <% end %>
+            
+            
+            
+            
+        </div>
+    <% end %>
+    
+    
+    <a href="/"><h1>작성하러 돌아가기</h1></a>
+    
+
+</div>
